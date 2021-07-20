@@ -1,0 +1,17 @@
+#! /bin/sh 
+
+DESTHOST=rnog-rsync.zeuthen.desy.de
+DESTUSER=rnogtx 
+DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
+SRCDIR=/data/outbox 
+RATE=12  # kB/s 
+
+
+while true; 
+do 
+  rsync -avh --bwlimit=${RATE} --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  sleep 1
+done
+
+
+
