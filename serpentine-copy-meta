@@ -3,13 +3,13 @@
 DESTHOST=rnog-rsync.zeuthen.desy.de
 DESTUSER=rnogtx
 DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
-SRCDIR=/data/outbox
-RATE=12  # kB/s
+SRCDIR=/data/ingress
+RATE=2  # kB/s
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
 BLOCKSIZE=-B 512
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*" --include 'aux/*' --include 'cfg/*' ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
   sleep 1
 done
