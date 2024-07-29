@@ -3,10 +3,13 @@
 DESTHOST=rnog-rsync.zeuthen.desy.de
 DESTUSER=rnogtx
 DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
+#DESTHOST=rno-g.uchicago.edu
+#DESTUSER=rno-g-mirror 
+#DESTDIR=/data/desy-mirror/inbox
 SRCDIR=/data/outbox
-RATE=12  # kB/s
+RATE=24  # kB/s
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
-BLOCKSIZE=-B 512
+BLOCKSIZE="-B 4096"
 
 while true;
 do
