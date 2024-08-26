@@ -3,7 +3,7 @@
 DESTHOST=rnog-rsync.zeuthen.desy.de
 DESTUSER=rnogtx
 DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
-SRCDIR=/data/ingress
+SRCDIR=/data/outbox
 RATE=2  # kB/s
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
 BLOCKSIZE="-B 512"
