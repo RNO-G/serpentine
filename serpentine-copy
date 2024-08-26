@@ -13,6 +13,6 @@ BLOCKSIZE="-B 4096"
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --include '*root' --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --include "*root" --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
   sleep 1
 done
