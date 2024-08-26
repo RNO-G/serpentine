@@ -10,6 +10,6 @@ BLOCKSIZE="-B 512"
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*" --include 'aux/*' --include 'cfg/*' ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*.root" ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
   sleep 120
 done
