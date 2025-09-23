@@ -7,12 +7,12 @@ DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
 #DESTUSER=rno-g-mirror 
 #DESTDIR=/data/desy-mirror/inbox
 SRCDIR=/data/outbox
-RATE=24  # kB/s
+RATE=48  # kB/s
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
 BLOCKSIZE="-B 4096"
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "aux/" --exclude "cfg/" --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  timeout 3600 rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "aux/" --exclude "cfg/" --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
   sleep 1
 done
