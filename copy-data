@@ -1,0 +1,17 @@
+#! /bin/sh
+
+#This script allows to copy a subset of files from SRCDIR=/data/rootified/ to Desy. The file paths are passed
+# with a text file. The files are expected to be in the usual directory structure: stationXX/runYYYYYY/file
+
+FILELIST=$1
+
+DESTHOST=rnog-rsync.zeuthen.desy.de
+DESTUSER=rnogtx
+DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
+SRCDIR=/data/rootified/
+RATE=24  # kB/s
+PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
+BLOCKSIZE="-B 4096"
+
+rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "aux/" --exclude "cfg/" --files-from=${FILELIST}  ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+
