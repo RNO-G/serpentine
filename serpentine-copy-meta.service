@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/Users/felix/software/rnog/daq/serpentine/serpentine-copy-meta
+ExecStart=/home/jade/serpentine/serpentine-copy-meta
 Restart=always
 RestartSec=10
 WatchdogSec=600s
