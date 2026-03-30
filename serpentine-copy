@@ -18,5 +18,6 @@ do
   # Delete empty run* directories in source directory (left overs from rsync --remove-source-files)
   find ${SRCDIR} -type d -name "run*" -empty -delete
 
+  systemd-notify WATCHDOG=1
   sleep 1
 done

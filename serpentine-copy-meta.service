@@ -1,18 +1,18 @@
 [Unit]
-Description=Copy RNO-G data to DESY
+Description=Copy RNO-G metadata to DESY
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/Users/felix/software/rnog/daq/serpentine/serpentine-copy
+ExecStart=/Users/felix/software/rnog/daq/serpentine/serpentine-copy-meta
 Restart=always
 RestartSec=10
 WatchdogSec=60s
 User=rno-g
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=serpentine-copy
+SyslogIdentifier=serpentine-copy-meta
 
 [Install]
 WantedBy=multi-user.target

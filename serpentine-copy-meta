@@ -11,6 +11,8 @@ BLOCKSIZE="-B 512"
 while true;
 do
   rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*log.xz" --exclude "waveforms/" --exclude "header/" --exclude "daqstatus/" --exclude "*dat.gz" --exclude "*tmp" --exclude "*.root" ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  systemd-notify WATCHDOG=1
+
   echo "Sleep for 120s"
   sleep 120
 done
