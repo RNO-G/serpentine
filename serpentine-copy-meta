@@ -4,15 +4,18 @@ DESTHOST=rnog-rsync.zeuthen.desy.de
 DESTUSER=rnogtx
 DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
 SRCDIR=/data/ingress
-RATE=2  # kB/s
+RATE=48  # kB/s  - FS: Increased it to accomodate fast transfer in presents of flower data
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
 BLOCKSIZE="-B 512"
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*log.xz" --exclude "waveforms/" --exclude "header/" --exclude "daqstatus/" --exclude "*dat.gz" --exclude "*tmp" --exclude "*.root" ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} \
+    --exclude "*log.xz" --exclude "waveforms/" --exclude "header/" \
+    --exclude "daqstatus/" --exclude "*dat.gz" --exclude "*tmp" \
+    --exclude "*.root" ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
   systemd-notify WATCHDOG=1
 
-  echo "Sleep for 120s"
-  sleep 120
+  echo "Sleep for 10s"
+  sleep 10
 done

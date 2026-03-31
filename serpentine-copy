@@ -1,11 +1,8 @@
 #! /bin/sh
 
-DESTHOST=rnog-rsync.zeuthen.desy.de
-DESTUSER=rnogtx
-DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
-#DESTHOST=rno-g.uchicago.edu
-#DESTUSER=rno-g-mirror
-#DESTDIR=/data/desy-mirror/inbox
+DESTHOST=rnog-rsync.zeuthen.desy.de  # rno-g.uchicago.edu
+DESTUSER=rnogtx  # rno-g-mirror
+DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox  # /data/desy-mirror/inbox
 SRCDIR=/data/outbox
 RATE=48  # kB/s
 PERMS="Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r"
@@ -13,7 +10,9 @@ BLOCKSIZE="-B 4096"
 
 while true;
 do
-  timeout 3600 rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "aux/" --exclude "cfg/" --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  timeout 3600 rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} \
+    --exclude "aux/" --exclude "cfg/" \
+    --remove-source-files ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
 
   # Delete empty run* directories in source directory (left overs from rsync --remove-source-files)
   find ${SRCDIR} -type d -name "run*" -empty -delete
