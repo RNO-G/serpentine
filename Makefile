@@ -2,7 +2,7 @@
 
 SYSTEMD_DIR := /etc/systemd/system
 SERVICE_FILES := serpentine-copy.service serpentine-copy-meta.service
-SCRIPT_DIR := $(shell pwd)
+SCRIPT_DIR := /home/jade/serpentine
 
 install: $(SERVICE_FILES)
 	@echo "Installing systemd service files..."
