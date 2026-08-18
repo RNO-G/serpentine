@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# This script is meant to only copy cfg/ and aux/ directories down South.
+# That allows the quickest access to run meta data for monitoring.
+
 DESTHOST=rnog-rsync.zeuthen.desy.de
 DESTUSER=rnogtx
 DESTDIR=/pnfs/ifh.de/acs/radio/diskonly/data/inbox
@@ -10,7 +13,14 @@ BLOCKSIZE="-B 512"
 
 while true;
 do
-  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} --exclude "*log.xz" --exclude "waveforms/" --exclude "header/" --exclude "daqstatus/" --exclude "*dat.gz" --exclude "*tmp" --exclude "*.root" ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+  # Rules are evaluated in order, first match wins: keep only top-level station*
+  # directories (the "/" anchors the pattern at SRCDIR), then drop bulk data.
+  rsync -P -avh --bwlimit=${RATE} --chmod=${PERMS} ${BLOCKSIZE} \
+    --include "/station*/" --exclude "/*" \
+    --exclude "*log.xz" --exclude "waveforms/" --exclude "header/" \
+    --exclude "daqstatus/" --exclude "*dat.gz" --exclude "*tmp" --exclude "*.root" \
+    ${SRCDIR}/ ${DESTUSER}@${DESTHOST}:${DESTDIR}
+
   echo "Sleep for 120s"
   sleep 120
 done
