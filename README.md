@@ -16,8 +16,8 @@ Serpentine provides two systemd services that continuously synchronize data and 
 - Managed by systemd (runs continuously)
 
 **`serpentine-copy-meta`** — Copies metadata files from `/data/ingress` to DESY
-- Transfer rate: 2 kB/s
-- Sync interval: 120 seconds between cycles
+- Transfer rate: 48 kB/s
+- Sync interval: 10 seconds between cycles
 - Source directory: `/data/ingress`
 - Excludes logs, waveforms, headers, and other large data types
 - Managed by systemd (runs continuously)
